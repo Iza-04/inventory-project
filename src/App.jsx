@@ -1,12 +1,11 @@
+// src/App.jsx
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import React from "react";
-import App from "./App";
-import { App2 } from "./App";
 import DndExample from "./components/DndExample";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+export default function App() {
   return (
     <div className="container mt-4">
       <h2>Course project</h2>
@@ -15,7 +14,8 @@ function App() {
   );
 }
 
-function App2() {
+// именованный экспорт второго варианта
+export function App2() {
   return (
     <div className="App">
       <header className="App-header">
@@ -35,7 +35,3 @@ function App2() {
     </div>
   );
 }
-
-export default App;
-
-export { App2 };
