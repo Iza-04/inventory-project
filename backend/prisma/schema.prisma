@@ -1,3 +1,5 @@
+mkdir -p prisma
+cat > prisma/schema.prisma <<'PRISMA'
 generator client {
   provider = "prisma-client-js"
 }
