@@ -3,9 +3,9 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 export default function DndExample() {
   const [items, setItems] = React.useState([
-    { id: "1", content: "Первый элемент" },
-    { id: "2", content: "Второй элемент" },
-    { id: "3", content: "Третий элемент" },
+    { id: "1", content: "First" },
+    { id: "2", content: "Second" },
+    { id: "3", content: "Third" },
   ]);
 
   function handleOnDragEnd(result) {
@@ -18,7 +18,7 @@ export default function DndExample() {
 
   return (
     <div className="container mt-4">
-      <h3>Drag and Drop Example</h3>
+      <h3>Drag and Drop TEST</h3>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (
