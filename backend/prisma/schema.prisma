@@ -8,60 +8,62 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  name      String?
-  password  String?
-  role      String    @default("user") // "admin"
-  blocked   Boolean   @default(false)
-  createdAt DateTime  @default(now())
-  inventories Inventory[] @relation("Owner")
-  accesses  InventoryAccess[]
+  id           String            @id @default(uuid())
+  email        String            @unique
+  name         String?
+  password     String?
+  role         String            @default("user")
+  blocked      Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  inventories  Inventory[]       @relation("Owner")
+  accesses     InventoryAccess[]
+  createdItems Item[]
 }
 
 model Inventory {
-  id          String  @id @default(uuid())
+  id          String            @id @default(uuid())
   title       String
   description String?
   category    String
   imageUrl    String?
   ownerId     String
-  owner       User    @relation(fields:[ownerId], references:[id], name: "Owner")
-  public      Boolean @default(false)
-  tags        String[] @default([])
-  fields      Json?   // JSON definition of custom fields (simpler)
+  owner       User              @relation(fields: [ownerId], references: [id], name: "Owner")
+  public      Boolean           @default(false)
+  tags        String[]          @default([])
+  fields      Json? // JSON definition of custom fields (simpler)
   items       Item[]
   accesses    InventoryAccess[]
-  createdAt   DateTime @default(now())
+  createdAt   DateTime          @default(now())
 }
 
 model InventoryAccess {
-  id          String   @id @default(uuid())
-  inventory   Inventory @relation(fields:[inventoryId], references:[id])
+  id          String    @id @default(uuid())
+  inventory   Inventory @relation(fields: [inventoryId], references: [id])
   inventoryId String
-  user        User      @relation(fields:[userId], references:[id])
+  user        User      @relation(fields: [userId], references: [id])
   userId      String
   write       Boolean   @default(true)
+
   @@unique([inventoryId, userId])
 }
 
 model Item {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   inventoryId String
-  inventory   Inventory @relation(fields:[inventoryId], references:[id])
+  inventory   Inventory @relation(fields: [inventoryId], references: [id])
   customId    String
   data        Json
-  version     Int      @default(1)
+  version     Int       @default(1)
   createdById String?
-  createdBy   User?    @relation(fields:[createdById], references:[id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdBy   User?     @relation(fields: [createdById], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@unique([inventoryId, customId])
 }
 
 model CustomIdSequence {
-  id          String   @id @default(uuid())
-  inventoryId String   @unique
-  last        Int      @default(0)
+  id          String @id @default(uuid())
+  inventoryId String @unique
+  last        Int    @default(0)
 }
