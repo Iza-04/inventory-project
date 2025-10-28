@@ -1,8 +1,24 @@
+import express from "express";
+import itemsRouter from "./routes/items.js";
+
+const app = express();
+app.use(express.json());
+
+// Подключаем маршруты
+app.use("/api/items", itemsRouter);
+
+// health-check
+app.get("/health", (req, res) => res.send("OK"));
+
+app.listen(process.env.PORT || 4000, () =>
+  console.log("Server running on port", process.env.PORT || 4000)
+);
+
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { PrismaClient } = require("@prisma/client");
-const app = express();
+// const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 4000;
 
