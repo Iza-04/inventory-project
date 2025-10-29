@@ -4,10 +4,10 @@ import itemsRouter from "./routes/items.js";
 const app = express();
 app.use(express.json());
 
-// Подключаем маршруты
+// Подключила маршруты
 app.use("/api/items", itemsRouter);
 
-// health-check
+// checking
 app.get("/health", (req, res) => res.send("OK"));
 
 app.listen(process.env.PORT || 4000, () =>
