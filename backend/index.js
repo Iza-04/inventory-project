@@ -1,5 +1,5 @@
 import express from "express";
-import itemsRouter from "./routes/items.js";
+import itemsRouter from "./src/routes/items.js";
 
 const app = express();
 app.use(express.json());
