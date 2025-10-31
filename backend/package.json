@@ -5,9 +5,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.21.1",
-    "dotenv": "^16.4.5",
-    "@prisma/client": "^6.17.1"
+    "@prisma/client": "^6.18.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
