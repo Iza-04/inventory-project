@@ -1,4 +1,3 @@
-// src/index.js
 import React from "react";
 import { createRoot } from "react-dom/client"; // для React 18/19
 import App from "./App";
