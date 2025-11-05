@@ -30,10 +30,11 @@ model Inventory {
   owner       User     @relation(fields:[ownerId], references:[id], name:"Owner")
   public      Boolean  @default(false)
   tags        String[] @default([])
-  fields      Json?
+  fields      Json?    // custom fields definitions
   items       Item[]
   accesses    InventoryAccess[]
   createdAt   DateTime @default(now())
+  version     Int      @default(1)
 }
 
 model InventoryAccess {
