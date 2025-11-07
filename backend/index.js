@@ -1,6 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
+import inventoriesRouter from "./src/routes/inventories.js";
+import itemsRouter from "./src/routes/items.js";
+import authRouter from "./src/routes/auth.js";
+import adminRouter from "./src/routes/admin.js";
+
+app.use("/api/auth", authRouter);
+app.use("/api/inventories", inventoriesRouter);
+app.use("/api/items", itemsRouter); // or nested under inventories/:id/items
+app.use("/api/admin", adminRouter);
 
 dotenv.config();
 
