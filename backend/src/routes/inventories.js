@@ -1,9 +1,12 @@
 import express from "express";
+import {
+  getAllInventories,
+  createInventory,
+} from "../controllers/inventoriesController.js";
+
 const router = express.Router();
 
-// Простой тестовый эндпоинт
-router.get("/", async (req, res) => {
-  res.json({ message: "Inventories route is working 🚀" });
-});
+router.get("/", getAllInventories);
+router.post("/", createInventory);
 
 export default router;

@@ -1,16 +1,11 @@
-import { createItem } from "../services/itemService.js";
+export const getAllItems = async (req, res) => {
+  res.json([
+    { id: "ITM001", name: "Laptop", price: 1200 },
+    { id: "ITM002", name: "Monitor", price: 300 },
+  ]);
+};
 
-export async function createItemController(req, res) {
-  try {
-    const { inventoryId, ...data } = req.body;
-    const item = await createItem(inventoryId, data);
-    res.status(201).json(item);
-  } catch (error) {
-    if (error.message.includes("unique")) {
-      res.status(409).json({ message: "Duplicate custom ID" });
-    } else {
-      console.error(error);
-      res.status(500).json({ message: "Server error" });
-    }
-  }
-}
+export const createItem = async (req, res) => {
+  const { name, price } = req.body;
+  res.status(201).json({ message: "Item added", data: { name, price } });
+};

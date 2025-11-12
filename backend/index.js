@@ -1,49 +1,18 @@
 import express from "express";
-import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
 import inventoriesRouter from "./src/routes/inventories.js";
 import itemsRouter from "./src/routes/items.js";
 import authRouter from "./src/routes/auth.js";
 import adminRouter from "./src/routes/admin.js";
 
-app.use("/api/auth", authRouter);
-app.use("/api/inventories", inventoriesRouter);
-app.use("/api/items", itemsRouter); // or nested under inventories/:id/items
-app.use("/api/admin", adminRouter);
-
-dotenv.config();
-
-const prisma = new PrismaClient();
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
+app.get("/health", (req, res) => res.json({ status: "ok" }));
 
-// Health
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
-});
+app.use("/api/inventories", inventoriesRouter);
+app.use("/api/items", itemsRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/admin", adminRouter);
 
-// Demo route
-app.post("/api/items", async (req, res) => {
-  const { inventoryId, name, price } = req.body;
-
-  try {
-    const item = await prisma.item.create({
-      data: {
-        inventoryId,
-        name,
-        price,
-      },
-    });
-
-    res.status(201).json(item);
-  } catch (error) {
-    console.error("Error creating item:", error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
