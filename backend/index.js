@@ -7,6 +7,7 @@ import adminRouter from "./src/routes/admin.js";
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use("/auth", authRouter);
 app.use(express.json());
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
