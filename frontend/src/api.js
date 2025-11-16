@@ -1,5 +1,12 @@
 const API_BASE = "http://localhost:4000";
 
+// useAutoSave(state, saveFn, deps)
+useEffect(() => {
+  if (!changed) return;
+  const t = setTimeout(() => saveFn(state), 8000);
+  return () => clearTimeout(t);
+}, [state, ...deps]);
+
 export async function getInventories() {
   const res = await fetch(`${API_BASE}/api/inventories`);
   if (!res.ok) throw new Error("Failed to fetch inventories");
