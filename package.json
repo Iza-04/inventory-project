@@ -1,6 +1,29 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "express": "^5.1.0",
     "react-bootstrap": "^2.10.10"
+  },
+  "name": "my-course-project-app",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Iza-04/inventory-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Iza-04/inventory-project/issues"
+  },
+  "homepage": "https://github.com/Iza-04/inventory-project#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }

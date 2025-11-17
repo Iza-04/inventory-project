@@ -1,17 +1,13 @@
 import express from "express";
+import { authenticate } from "../middleware/auth.js";
 import {
-  getAllInventories,
   createInventory,
-} from "../controllers/inventoriesController.js";
+  getInventories,
+} from "../controllers/inventoryController.js";
 
 const router = express.Router();
 
-router.get("/", getAllInventories); // supports ?q=, ?page=, ?limit=
+router.get("/", authenticate, getInventories);
 router.post("/", authenticate, createInventory);
-router.get("/:id", getInventoryById);
-router.put("/:id", authenticate, authorizeOwnerOrAdmin, updateInventory);
-router.delete("/:id", authenticate, authorizeOwnerOrAdmin, deleteInventory);
-router.get("/:id/items", getItemsForInventory); // pagination+filter
-router.post("/:id/items", authenticate, authorizeWriteAccess, createItem);
 
 export default router;
