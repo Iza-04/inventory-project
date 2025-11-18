@@ -5,6 +5,9 @@ const app = express();
 const PORT = 5000;
 
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("Server is running. Go to /api/inventories");
+});
 app.use("/api/inventories", inventoryRoutes);
 
 app.listen(PORT, () => {
