@@ -1,3 +1,8 @@
 export default function ProfilePage() {
-  return <h1>Profile Page</h1>;
+  return (
+    <div>
+      <h3>Profile</h3>
+      <p>User profile (placeholder).</p>
+    </div>
+  );
 }

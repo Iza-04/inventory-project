@@ -1,16 +1,36 @@
-import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">Inventory</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/admin">Admin</Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+    <header>
+      <h2>Inventory App</h2>
+      <nav>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/inventory"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Inventory
+        </NavLink>
+        <NavLink
+          to="/admin"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Admin
+        </NavLink>
+        <NavLink
+          to="/profile"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Profile
+        </NavLink>
+      </nav>
+    </header>
   );
 }

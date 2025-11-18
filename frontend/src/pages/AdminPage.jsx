@@ -1,3 +1,8 @@
 export default function AdminPage() {
-  return <h1>Admin Page</h1>;
+  return (
+    <div>
+      <h3>Admin</h3>
+      <p>Admin area (placeholder).</p>
+    </div>
+  );
 }
