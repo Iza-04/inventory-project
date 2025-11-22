@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = "/api/inventories";
-const TOKEN = "mysecrettoken";
+const TOKEN = "mysecrettoken"; // позже можно вынести в .env
 
 export async function getInventories() {
   const res = await axios.get(API, { headers: { Authorization: TOKEN } });
@@ -16,6 +16,15 @@ export async function createInventory(item) {
 }
 
 export async function deleteInventory(id) {
-  // если later добавить реализацию на backend
-  return null;
+  const res = await axios.delete(`${API}/${id}`, {
+    headers: { Authorization: TOKEN },
+  });
+  return res.data;
+}
+
+export async function updateInventory(id, item) {
+  const res = await axios.put(`${API}/${id}`, item, {
+    headers: { Authorization: TOKEN },
+  });
+  return res.data;
 }
