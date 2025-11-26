@@ -14,6 +14,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1>Inventory</h1>
-  <DataTable :columns="columns" :rows="items" />
+  <div>
+    <h1>Inventory for all</h1>
+
+    <DataTable :columns="columns" :rows="items" />
+  </div>
 </template>
