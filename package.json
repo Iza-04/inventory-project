@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "connect-history-api-fallback": "^2.0.0",
     "express": "^5.1.0",
     "pg": "^8.16.3",
     "react-bootstrap": "^2.10.10",
