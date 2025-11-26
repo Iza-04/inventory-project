@@ -52,9 +52,7 @@ const props = defineProps({
   rows: { type: Array, required: true },
 });
 
-// ----------------
 // Поиск
-// ----------------
 const search = ref("");
 
 const filteredRows = computed(() => {
@@ -64,10 +62,7 @@ const filteredRows = computed(() => {
     JSON.stringify(row).toLowerCase().includes(search.value.toLowerCase())
   );
 });
-
-// ----------------
 // Сортировка
-// ----------------
 const sort = ref({
   column: "",
   direction: "asc",
@@ -94,10 +89,7 @@ const sortedRows = computed(() => {
     return 0;
   });
 });
-
-// ----------------
 // Пагинация
-// ----------------
 const page = ref(1);
 const perPage = 10;
 
