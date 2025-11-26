@@ -19,7 +19,7 @@ export default function InventoryPage() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Inventory for all</h1>
+      <h1>Inventory</h1>
       <DataTable columns={columns} data={items} />
     </div>
   );
