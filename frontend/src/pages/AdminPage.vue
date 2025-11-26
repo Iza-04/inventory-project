@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import DataTable from "@/components/DataTable.vue";
 
 const users = ref([]);
 const loading = ref(true);
@@ -37,4 +38,5 @@ onMounted(async () => {
 
     <div v-if="loading" class="text-gray-500 mt-4">Загрузка...</div>
   </div>
+  <DataTable :columns="columns" :rows="items" />
 </template>

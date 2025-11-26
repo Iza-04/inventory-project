@@ -1,6 +1,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import DataTable from "@/components/DataTable.vue";
+
+const columns = ["id", "email", "role"];
+const rows = [
+  { id: 1, email: "test@gmail.com", role: "admin" }
+];
+</script>
+
+
 
 const userOrders = ref([]);
 
@@ -33,4 +42,5 @@ onMounted(async () => {
       </tbody>
     </table>
   </div>
+  <DataTable :columns="columns" :rows="rows" />
 </template>
