@@ -5,9 +5,10 @@ export default function AdminPage() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("/api/admin/users")
+    fetch("/api/users")
       .then((res) => res.json())
-      .then((data) => setUsers(data));
+      .then((data) => setUsers(data.users || []))
+      .catch(() => setUsers([]));
   }, []);
 
   const columns = [
@@ -19,7 +20,7 @@ export default function AdminPage() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Admin panel</h1>
+      <h1>Админ панель</h1>
       <DataTable columns={columns} data={users} />
     </div>
   );

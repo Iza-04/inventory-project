@@ -2,25 +2,25 @@ import { useEffect, useState } from "react";
 import DataTable from "../components/DataTable";
 
 export default function ProfilePage() {
-  const [orders, setOrders] = useState([]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    fetch("/api/profile/orders")
+    fetch("/api/profile/history")
       .then((res) => res.json())
-      .then((data) => setOrders(data));
+      .then((data) => setHistory(data.history || []))
+      .catch(() => setHistory([]));
   }, []);
 
   const columns = [
-    { key: "id", title: "ID" },
-    { key: "item", title: "Товар" },
-    { key: "quantity", title: "Количество" },
-    { key: "date", title: "Дата" }
+    { key: "date", title: "Дата" },
+    { key: "action", title: "Действие" },
+    { key: "details", title: "Описание" },
   ];
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>My profile</h1>
-      <DataTable columns={columns} data={orders} />
+      <h1>Профиль</h1>
+      <DataTable columns={columns} data={history} />
     </div>
   );
 }

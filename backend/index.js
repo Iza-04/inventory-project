@@ -1,26 +1,37 @@
 import express from "express";
-import inventoryRoutes from "./src/routes/inventories.js";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
+import cors from "cors";
 
 const app = express();
-const PORT = 5000;
-
+app.use(cors());
 app.use(express.json());
-app.get("/", (req, res) => {
-  res.send("Server is running. Go to /api/inventories");
-});
-app.use("/api/inventories", inventoryRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// Маршрут инвентаря
+app.get("/api/inventories", (req, res) => {
+  res.json([
+    { id: 1, name: "Ноутбук", category: "Техника", count: 4 },
+    { id: 2, name: "Стул", category: "Мебель", count: 12 },
+  ]);
+});
+
+app.get("/api/users", (req, res) => {
+  res.json({
+    users: [
+      { id: 1, name: "Admin", email: "admin@mail.com", role: "admin" },
+      { id: 2, name: "User", email: "user@mail.com", role: "user" },
+    ],
+  });
+});
+
+app.get("/api/profile/history", (req, res) => {
+  res.json({
+    history: [
+      { date: "2025-01-01", action: "Login", details: "Вход в систему" },
+      { date: "2025-01-03", action: "Edit", details: "Изменил данные профиля" },
+    ],
+  });
+});
+
+// СЕРВЕР
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
 });
