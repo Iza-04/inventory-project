@@ -1,51 +1,38 @@
+import "../styles/table.css"; // стили таблицы
+
 export default function DataTable({ columns, data }) {
   return (
-    <table style={{ width: "100%", borderCollapse: "collapse" }}>
-      <thead>
-        <tr>
-          {columns.map((col) => (
-            <th
-              key={col.key}
-              style={{
-                padding: 10,
-                borderBottom: "2px solid #ddd",
-                textAlign: "left",
-              }}
-            >
-              {col.title}
-            </th>
-          ))}
-        </tr>
-      </thead>
-
-      <tbody>
-        {data.length === 0 ? (
+    <div className="table-container">
+      <table className="custom-table">
+        <thead>
           <tr>
-            <td
-              colSpan={columns.length}
-              style={{ padding: 20, textAlign: "center" }}
-            >
-              Нет данных
-            </td>
+            {columns.map((col) => (
+              <th key={col.key}>{col.title}</th>
+            ))}
           </tr>
-        ) : (
-          data.map((item) => (
-            <tr key={item.id}>
-              {columns.map((col) => (
-                <td
-                  key={col.key}
-                  style={{
-                    padding: "8px 10px",
-                    borderBottom: "1px solid #eee",
-                  }}
-                >
-                  {item[col.key]}
-                </td>
-              ))}
+        </thead>
+
+        <tbody>
+          {!data || data.length === 0 ? (
+            <tr>
+              <td
+                colSpan={columns.length}
+                style={{ textAlign: "center", padding: 16 }}
+              >
+                Нет данных
+              </td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            data.map((row) => (
+              <tr key={row.id ?? JSON.stringify(row)}>
+                {columns.map((col) => (
+                  <td key={col.key}>{row[col.key]}</td>
+                ))}
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }

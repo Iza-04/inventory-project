@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DataTable from "../components/DataTable";
+import "../styles/table.css";
 
 export default function ProfilePage() {
   const [history, setHistory] = useState([]);
@@ -7,7 +8,7 @@ export default function ProfilePage() {
   useEffect(() => {
     fetch("/api/profile/history")
       .then((res) => res.json())
-      .then((data) => setHistory(data.history || []))
+      .then((data) => setHistory(data.history ?? data ?? []))
       .catch(() => setHistory([]));
   }, []);
 
@@ -18,7 +19,7 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: 20 }}>
       <h1>Профиль</h1>
       <DataTable columns={columns} data={history} />
     </div>
