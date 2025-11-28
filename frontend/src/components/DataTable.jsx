@@ -19,7 +19,7 @@ export default function DataTable({ columns, data }) {
                 colSpan={columns.length}
                 style={{ textAlign: "center", padding: 16 }}
               >
-                Нет данных
+                No data
               </td>
             </tr>
           ) : (
