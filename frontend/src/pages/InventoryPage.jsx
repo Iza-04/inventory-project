@@ -19,29 +19,48 @@ export default function InventoryPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // UI состояния
+  // UI состония
   const [search, setSearch] = useState("");
   const [searchId, setSearchId] = useState("");
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
 
-  // Сортировка
+  // сортировка
   const [sortKey, setSortKey] = useState("id");
   const [sortDir, setSortDir] = useState("asc");
 
+  // ---------------------------
+  // ✅ ОБНОВЛЁННЫЙ useEffect с демо-данными
+  // ---------------------------
   useEffect(() => {
     setLoading(true);
     setError(null);
 
     getInventories()
       .then((res) => {
-        const data = Array.isArray(res) ? res : res?.inventories ?? res ?? [];
+        let data = Array.isArray(res) ? res : res?.inventories ?? [];
+
+        // 🎨 Показываем пример, если данных нет
+        if (data.length === 0) {
+          data = [
+            { id: 1, name: "Пример 1", quantity: 10 },
+            { id: 2, name: "Пример 2", quantity: 30 },
+            { id: 3, name: "Пример 3", quantity: 20 },
+          ];
+        }
+
         setItems(data);
       })
       .catch((err) => {
-        console.error("Error loading inventories:", err);
-        setError("Не удалось загрузить данные инвентаря");
-        setItems([]);
+        console.error(err);
+        setError("Не удалось загрузить данные");
+
+        // ⚠️ Показываем пример даже при ошибке
+        setItems([
+          { id: 1, name: "Пример 1", quantity: 10 },
+          { id: 2, name: "Пример 2", quantity: 30 },
+          { id: 3, name: "Пример 3", quantity: 20 },
+        ]);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -75,13 +94,12 @@ export default function InventoryPage() {
 
   // пагинация
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
 
   // подготовка данных для графика
   const chartData = items.map((it) => ({
     id: it.id,
-    name: it.name ?? `#${it.id ?? ""}`,
+    name: it.name ?? `#${it.id}`,
     quantity: Number(it.quantity ?? 0),
   }));
 
@@ -145,7 +163,13 @@ export default function InventoryPage() {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Line type="monotone" dataKey="quantity" />
+            <Line
+              type="monotone"
+              dataKey="quantity"
+              stroke="#2b85ff"
+              strokeWidth={3}
+              dot={true}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>

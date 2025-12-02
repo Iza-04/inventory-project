@@ -4,10 +4,37 @@
   margin-top: 20px;
 }
 
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.pagination-bar button {
+  padding: 6px 12px;
+  border: none;
+  background: #2b85ff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-bar button:disabled {
+  background: #9bbdf7;
+  cursor: not-allowed;
+}
+
+.pagination-bar input {
+  width: 70px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .custom-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: sans-serif;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -18,7 +45,6 @@
   color: white;
   padding: 12px;
   text-align: left;
-  font-size: 15px;
 }
 
 .custom-table td {
