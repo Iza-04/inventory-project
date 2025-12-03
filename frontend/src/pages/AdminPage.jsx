@@ -31,7 +31,6 @@ export default function AdminPage() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/api/users/${id}`);
-      // обновляем список
       setUsers((prev) => prev.filter((u) => String(u.id) !== String(id)));
     } catch (err) {
       console.error("Ошибка удаления пользователя:", err);

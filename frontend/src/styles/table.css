@@ -55,3 +55,66 @@
 .custom-table tr:hover {
   background-color: #f2f6ff;
 }
+
+/* ---- форма регистрации ---- */
+.form-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+  max-width: 720px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-row input,
+.form-row select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-error {
+  margin-top: 10px;
+  color: #b00020;
+}
+
+.form-success {
+  margin-top: 10px;
+  color: #0a8a00;
+}
+
+.primary {
+  background: #2b85ff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* таблица действий */
+.table-with-actions .custom-table th,
+.table-with-actions .custom-table td {
+  padding: 8px;
+}
+
+.table-with-actions button {
+  padding: 6px 8px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
