@@ -3,23 +3,23 @@ import "../styles/table.css";
 
 export default function HomePage() {
   const employees = [
-    { id: 1, name: "Азамат", role: "Администратор" },
-    { id: 2, name: "Дильнора", role: "Менеджер" },
-    { id: 3, name: "Бехзод", role: "Складской сотрудник" },
+    { id: 1, name: "Name1", role: "Administartor" },
+    { id: 2, name: "Name2", role: "Manager" },
+    { id: 3, name: "Name3", role: "Employee" },
   ];
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Добро пожаловать</h1>
-      <p>Пример таблицы сотрудников:</p>
+      <h1>Welcome</h1>
+      <p>Employee table:</p>
 
       <div className="table-container">
         <table className="custom-table">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Имя</th>
-              <th>Должность</th>
+              <th>Name</th>
+              <th>Position</th>
             </tr>
           </thead>
           <tbody>

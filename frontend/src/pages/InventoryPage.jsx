@@ -30,7 +30,7 @@ export default function InventoryPage() {
   const [sortDir, setSortDir] = useState("asc");
 
   // ---------------------------
-  // ✅ ОБНОВЛЁННЫЙ useEffect с демо-данными
+  // ✅ ОБНОВЛЁННЫЙ useEffect
   // ---------------------------
   useEffect(() => {
     setLoading(true);
@@ -40,7 +40,7 @@ export default function InventoryPage() {
       .then((res) => {
         let data = Array.isArray(res) ? res : res?.inventories ?? [];
 
-        // 🎨 Показываем пример, если данных нет
+        // 🎨 Пример, если данных нет
         if (data.length === 0) {
           data = [
             { id: 1, name: "Пример 1", quantity: 10 },
@@ -53,9 +53,9 @@ export default function InventoryPage() {
       })
       .catch((err) => {
         console.error(err);
-        setError("Не удалось загрузить данные");
+        setError("Can't download data");
 
-        // ⚠️ Показываем пример даже при ошибке
+        // ⚠️ Пример даже при ошибке
         setItems([
           { id: 1, name: "Пример 1", quantity: 10 },
           { id: 2, name: "Пример 2", quantity: 30 },

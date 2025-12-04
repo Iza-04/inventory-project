@@ -29,7 +29,7 @@ export default function ProfilePage() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Профиль</h1>
+      <h1>Profile</h1>
       {error && <p style={{ color: "orange" }}>{error}</p>}
       <DataTable columns={columns} data={history} />
     </div>

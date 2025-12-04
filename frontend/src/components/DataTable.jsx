@@ -55,7 +55,7 @@ export default function DataTable({ columns, data }) {
           value={gotoId}
           onChange={(e) => setGotoId(e.target.value)}
         />
-        <button onClick={handleGoto}>Перейти</button>
+        <button onClick={handleGoto}>Push</button>
       </div>
 
       {/* Таблица */}
