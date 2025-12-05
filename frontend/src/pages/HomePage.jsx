@@ -2,32 +2,39 @@ import React from "react";
 import "../styles/table.css";
 
 export default function HomePage() {
-  const employees = [
-    { id: 1, name: "Name1", role: "Administartor" },
-    { id: 2, name: "Name2", role: "Manager" },
-    { id: 3, name: "Name3", role: "Employee" },
+  const columns = [
+    { key: "id", title: "ID сотрудника" },
+    { key: "name", title: "Имя" },
+    { key: "role", title: "Должность" },
+  ];
+
+  const sampleEmployees = [
+    { id: 1, name: "Iza R M", role: "Admin" },
+    { id: 2, name: "Iza M", role: "Manager" },
+    { id: 3, name: "E M", role: "Employee" },
   ];
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Welcome</h1>
-      <p>Employee table:</p>
+      <h1>Добро пожаловать в систему инвентаря</h1>
+      <p>Ниже пример таблицы сотрудников:</p>
 
       <div className="table-container">
         <table className="custom-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Position</th>
+              {columns.map((col) => (
+                <th key={col.key}>{col.title}</th>
+              ))}
             </tr>
           </thead>
+
           <tbody>
-            {employees.map((e) => (
-              <tr key={e.id}>
-                <td>{e.id}</td>
-                <td>{e.name}</td>
-                <td>{e.role}</td>
+            {sampleEmployees.map((emp) => (
+              <tr key={emp.id}>
+                <td>{emp.id}</td>
+                <td>{emp.name}</td>
+                <td>{emp.role}</td>
               </tr>
             ))}
           </tbody>
