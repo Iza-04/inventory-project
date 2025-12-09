@@ -16,15 +16,15 @@ export default function ProfilePage() {
       })
       .catch((err) => {
         console.warn("History not available:", err);
-        setError("История недоступна на сервере");
+        setError("History is not on the service");
         setHistory([]);
       });
   }, []);
 
   const columns = [
-    { key: "date", title: "Дата" },
-    { key: "action", title: "Действие" },
-    { key: "details", title: "Описание" },
+    { key: "date", title: "Date" },
+    { key: "action", title: "Action" },
+    { key: "details", title: "Sample" },
   ];
 
   return (

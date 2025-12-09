@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import DataTable from "../components/DataTable";
 import { getInventories } from "../services/inventoryService";
-
 import {
   LineChart,
   Line,
@@ -11,7 +10,6 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-
 import "../styles/table.css";
 
 export default function InventoryPage() {
@@ -19,19 +17,14 @@ export default function InventoryPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // UI состония
   const [search, setSearch] = useState("");
   const [searchId, setSearchId] = useState("");
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
 
-  // сортировка
   const [sortKey, setSortKey] = useState("id");
   const [sortDir, setSortDir] = useState("asc");
 
-  // ---------------------------
-  // ✅ ОБНОВЛЁННЫЙ useEffect
-  // ---------------------------
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -40,8 +33,7 @@ export default function InventoryPage() {
       .then((res) => {
         let data = Array.isArray(res) ? res : res?.inventories ?? [];
 
-        // 🎨 Пример, если данных нет
-        if (data.length === 0) {
+        if (!data || data.length === 0) {
           data = [
             { id: 1, name: "Пример 1", quantity: 10 },
             { id: 2, name: "Пример 2", quantity: 30 },
@@ -53,9 +45,7 @@ export default function InventoryPage() {
       })
       .catch((err) => {
         console.error(err);
-        setError("Can't download data");
-
-        // ⚠️ Пример даже при ошибке
+        setError("Не удалось загрузить данные");
         setItems([
           { id: 1, name: "Пример 1", quantity: 10 },
           { id: 2, name: "Пример 2", quantity: 30 },
@@ -65,40 +55,30 @@ export default function InventoryPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  // обработка фильтров
   const filtered = useMemo(() => {
     let data = [...items];
-
     if (search.trim()) {
       data = data.filter((i) =>
         i.name?.toLowerCase().includes(search.toLowerCase())
       );
     }
-
     if (searchId.trim()) {
       data = data.filter((i) => String(i.id) === searchId.trim());
     }
-
-    // сортировка
     data.sort((a, b) => {
       const v1 = a[sortKey];
       const v2 = b[sortKey];
-
       if (v1 < v2) return sortDir === "asc" ? -1 : 1;
       if (v1 > v2) return sortDir === "asc" ? 1 : -1;
       return 0;
     });
-
     return data;
   }, [items, search, searchId, sortKey, sortDir]);
 
-  // пагинация
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
 
-  // подготовка данных для графика
   const chartData = items.map((it) => ({
-    id: it.id,
     name: it.name ?? `#${it.id}`,
     quantity: Number(it.quantity ?? 0),
   }));
@@ -110,9 +90,8 @@ export default function InventoryPage() {
   ];
 
   const toggleSort = (key) => {
-    if (sortKey === key) {
-      setSortDir(sortDir === "asc" ? "desc" : "asc");
-    } else {
+    if (sortKey === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    else {
       setSortKey(key);
       setSortDir("asc");
     }
@@ -125,22 +104,20 @@ export default function InventoryPage() {
       {loading && <p>Загрузка...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {/* Панель фильтров */}
-      <div className="filters">
+      <div
+        className="filters"
+        style={{ display: "flex", gap: 8, marginBottom: 12 }}
+      >
         <input
-          type="text"
           placeholder="Поиск по названию"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-
         <input
-          type="number"
           placeholder="Поиск по ID"
           value={searchId}
           onChange={(e) => setSearchId(e.target.value)}
         />
-
         <select
           value={pageSize}
           onChange={(e) => {
@@ -155,7 +132,6 @@ export default function InventoryPage() {
         </select>
       </div>
 
-      {/* График */}
       <div style={{ width: "100%", height: 320, marginBottom: 20 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
@@ -167,14 +143,13 @@ export default function InventoryPage() {
               type="monotone"
               dataKey="quantity"
               stroke="#2b85ff"
-              strokeWidth={3}
-              dot={true}
+              strokeWidth={2}
+              dot
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Таблица */}
       <DataTable
         columns={columns.map((c) => ({
           ...c,
@@ -184,24 +159,36 @@ export default function InventoryPage() {
         data={paginated}
       />
 
-      {/* Пагинация */}
-      <div className="pagination">
+      <div
+        className="pagination"
+        style={{ marginTop: 12, display: "flex", gap: 8, alignItems: "center" }}
+      >
+        <button type="button" onClick={() => setPage(1)} disabled={page === 1}>
+          ≪
+        </button>
         <button
+          type="button"
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
         >
-          Preview
+          ‹
         </button>
-
         <span>
-          Page {page} из {totalPages}
+          Страница {page} из {totalPages}
         </span>
-
         <button
+          type="button"
           onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
           disabled={page === totalPages}
         >
-          Next
+          ›
+        </button>
+        <button
+          type="button"
+          onClick={() => setPage(totalPages)}
+          disabled={page === totalPages}
+        >
+          ≫
         </button>
       </div>
     </div>

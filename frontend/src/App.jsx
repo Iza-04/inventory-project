@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import InventoryPage from "./pages/InventoryPage";
-import AdminPage from "./pages/AdminPage"; // ← добавлено
-import ProfilePage from "./pages/ProfilePage"; // ← добавлено
+import AdminPage from "./pages/AdminPage";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div style={{ paddingTop: 80 }}>
+      <div style={{ paddingTop: 12 }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/inventory" element={<InventoryPage />} />
