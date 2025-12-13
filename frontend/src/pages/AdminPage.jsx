@@ -17,7 +17,7 @@ export default function AdminPage() {
         : res.data?.users ?? res.data ?? [];
       setUsers(data);
     } catch (err) {
-      console.error("Ошибка загрузки пользователей:", err);
+      console.error("Error of Users loading:", err);
       setUsers([]);
     } finally {
       setLoading(false);
@@ -33,8 +33,8 @@ export default function AdminPage() {
       await axios.delete(`/api/users/${id}`);
       setUsers((prev) => prev.filter((u) => String(u.id) !== String(id)));
     } catch (err) {
-      console.error("Ошибка удаления пользователя:", err);
-      alert("Не удалось удалить пользователя (см. консоль).");
+      console.error("Error of User deletion:", err);
+      alert("The User can not be deleted (try console).");
     }
   };
 
@@ -42,21 +42,19 @@ export default function AdminPage() {
     { key: "id", title: "ID" },
     { key: "name", title: "Имя" },
     { key: "email", title: "Email" },
-    { key: "role", title: "Роль" },
-    // кнопка удаление будет показана через DataTable? Если нет, ниже подсказка
+    { key: "role", title: "Position" },
   ];
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Админ-панель</h1>
+      <h1>Administrator page</h1>
       {loading ? (
-        <p>Загрузка...</p>
+        <p>Loading...</p>
       ) : (
         <DataTable columns={columns} data={users} />
       )}
       <p style={{ marginTop: 10 }}>
-        Для удаления используйте API (метод DELETE /api/users/:id). Код удаления
-        в консоли.
+        API for deletion (method DELETE /api/users/:id). Code at console.
       </p>
     </div>
   );
