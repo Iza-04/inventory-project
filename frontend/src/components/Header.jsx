@@ -7,8 +7,8 @@ export default function Header() {
     <header
       style={{
         padding: 14,
-        background: "#f5f7fb",
-        borderBottom: "1px solid #e6eefc",
+        background: "#6d6f74ff",
+        borderBottom: "1px solid #3863adff",
       }}
     >
       <div
