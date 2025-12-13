@@ -35,9 +35,9 @@ export default function InventoryPage() {
 
         if (!data || data.length === 0) {
           data = [
-            { id: 1, name: "Пример 1", quantity: 10 },
-            { id: 2, name: "Пример 2", quantity: 30 },
-            { id: 3, name: "Пример 3", quantity: 20 },
+            { id: 1, name: "Example 1", quantity: 10 },
+            { id: 2, name: "Example 2", quantity: 30 },
+            { id: 3, name: "Example 3", quantity: 20 },
           ];
         }
 
@@ -45,11 +45,11 @@ export default function InventoryPage() {
       })
       .catch((err) => {
         console.error(err);
-        setError("Не удалось загрузить данные");
+        setError("Can not load the data");
         setItems([
-          { id: 1, name: "Пример 1", quantity: 10 },
-          { id: 2, name: "Пример 2", quantity: 30 },
-          { id: 3, name: "Пример 3", quantity: 20 },
+          { id: 1, name: "Example 1", quantity: 10 },
+          { id: 2, name: "Example 2", quantity: 30 },
+          { id: 3, name: "Example 3", quantity: 20 },
         ]);
       })
       .finally(() => setLoading(false));
@@ -85,8 +85,8 @@ export default function InventoryPage() {
 
   const columns = [
     { key: "id", title: "ID" },
-    { key: "name", title: "Название" },
-    { key: "quantity", title: "Количество" },
+    { key: "name", title: "Title" },
+    { key: "quantity", title: "Quantity" },
   ];
 
   const toggleSort = (key) => {
@@ -99,9 +99,9 @@ export default function InventoryPage() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Инвентарь</h1>
+      <h1>Inventory</h1>
 
-      {loading && <p>Загрузка...</p>}
+      {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div
@@ -109,12 +109,12 @@ export default function InventoryPage() {
         style={{ display: "flex", gap: 8, marginBottom: 12 }}
       >
         <input
-          placeholder="Поиск по названию"
+          placeholder="Searching by the name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <input
-          placeholder="Поиск по ID"
+          placeholder="Searching by ID"
           value={searchId}
           onChange={(e) => setSearchId(e.target.value)}
         />
